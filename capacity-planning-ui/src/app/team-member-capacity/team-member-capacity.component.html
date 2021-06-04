@@ -1,0 +1,13 @@
+<h2>Capacity</h2>
+<table>
+    <tr>
+        <th *ngFor = "let column of headers">
+            {{column}}
+        </th>
+    </tr>
+
+    <tr *ngFor="let capacity of capacityList">
+        <td>{{capacity.hours}}</td>
+        <td>{{capacity.date}}</td>
+    </tr>
+</table>

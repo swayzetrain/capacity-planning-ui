@@ -1,0 +1,24 @@
+<h2>{{teamName}}</h2>
+<table>
+    <tr>
+        <th *ngFor = "let column of headers">
+            {{column}}
+        </th>
+    </tr>
+
+    <tr *ngFor="let teamMember of teamMembers">
+        <td>
+            <a routerLink="/teams/{{teamId}}/members/{{teamMember.teamMemberId}}">
+                {{teamMember.name}}
+            </a>
+        </td>
+        <td>{{teamMember.role}}</td>
+        <td>
+            <a routerLink="/teams/{{teamId}}/members/{{teamMember.teamMemberId}}/capacity">
+                Capacity
+            </a>
+        </td>
+        <td>{{teamMember.createdDate}}</td>
+        <td>{{teamMember.modifiedDate}}</td>
+    </tr>
+</table>

@@ -8,11 +8,13 @@
 
     <tr *ngFor="let teamMember of teamMembers">
         <td>
-            <a routerLink="/teams/{{teamId}}/members/{{teamMember.teamMemberId}}">
-                {{teamMember.name}}
-            </a>
+            <span contenteditable="true">{{teamMember.name}}</span>
         </td>
-        <td>{{teamMember.role}}</td>
+        <select>
+            <option *ngFor="let role of roles" [ngValue]="role" [selected]="role === teamMember.role">
+                {{role}}
+            </option>
+         </select>
         <td>
             <a routerLink="/teams/{{teamId}}/members/{{teamMember.teamMemberId}}/capacity">
                 Capacity

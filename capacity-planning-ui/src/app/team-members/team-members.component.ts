@@ -14,7 +14,11 @@ export class TeamMembersComponent implements OnInit {
   teamName:string = null;
   teamMembers:TeamMember[] = [];
 
+  enableEdit = false;
+  enableEditIndex = null;
+
   headers:string[] = ['Name', 'Role', 'Capacity', 'Created Date', 'Modified Date'];
+  roles:string[] = ['SCRUM', 'REQUIREMENTS_ANALYST', 'DEVELOPER', 'QUALITY_ENGINEER'];
 
   constructor(private teamsService:TeamsService, private route: ActivatedRoute) { }
 
@@ -36,6 +40,12 @@ export class TeamMembersComponent implements OnInit {
   getTeamName():void {
     this.teamsService.getTeam(this.teamId)
       .subscribe(team => this.teamName = team.name);
+  }
+
+  enableEditMethod(e, i) {
+    this.enableEdit = true;
+    this.enableEditIndex = i;
+    console.log(i, e);
   }
 
 }

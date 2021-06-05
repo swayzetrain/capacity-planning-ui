@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { TeamMember } from '../models/team-member';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,14 @@ export class TeamsService {
     var url = 'http://localhost:8080/v1/teams/' + teamId + '/members/' + teamMemberId + '/capacity';
 
     return this.httpClient.get(url);
+
+  }
+
+  public updateTeamMember(teamId:string, teamMemberId:string, teamMember:TeamMember): Observable<any> {
+    
+    var url = 'http://localhost:8080/v1/teams/' + teamId + '/members/' + teamMemberId;
+
+    return this.httpClient.patch(url, JSON.stringify(teamMember));
 
   }
 

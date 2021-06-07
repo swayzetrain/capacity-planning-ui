@@ -1,16 +1,24 @@
-<h2>{{teamName}}</h2>
-<table>
+<div style="width: 100vw;">
+    <div style="width: 10vw; float: left;">
+        <h2>{{teamName}}</h2>
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-raised-button color="primary" (click)="openCreateTeamMemberDialog()">+ Team Member</button>
+    </div>
+</div>
+
+<table align="center">
     <tr>
         <th *ngFor = "let column of headers">
             {{column}}
         </th>
     </tr>
 
-    <tr *ngFor="let teamMember of teamMembers">
+    <tr *ngFor="let teamMember of teamMembers, let t = index">
         <td>
-            <span contenteditable="true">{{teamMember.name}}</span>
+            <span contenteditable="true" (blur)="onTeamMemberNameBlurEvent($event, teamMember, t)">{{teamMember.name}}</span>
         </td>
-        <select>
+        <select (change)="changeRole($event, teamMember)">
             <option *ngFor="let role of roles" [ngValue]="role" [selected]="role === teamMember.role">
                 {{role}}
             </option>

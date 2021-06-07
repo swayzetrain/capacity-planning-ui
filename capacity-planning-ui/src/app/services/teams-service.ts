@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TeamMember } from '../models/team-member';
 
 @Injectable({
@@ -40,11 +40,23 @@ export class TeamsService {
 
   }
 
-  public updateTeamMember(teamId:string, teamMemberId:string, teamMember:TeamMember): Observable<any> {
+  public updateTeamMember(teamId:string, teamMemberId:string, teamMember:Partial<TeamMember>): Observable<any> {
     
     var url = 'http://localhost:8080/v1/teams/' + teamId + '/members/' + teamMemberId;
 
-    return this.httpClient.patch(url, JSON.stringify(teamMember));
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    
+    return this.httpClient.patch(url, JSON.stringify(teamMember), { 'headers' : headers });
+
+  }
+
+  public createTeamMember(teamId:string, teamMember:Partial<TeamMember>): Observable<any> {
+    
+    var url = 'http://localhost:8080/v1/teams/' + teamId + '/members';
+
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    
+    return this.httpClient.post(url, JSON.stringify(teamMember), { 'headers' : headers });
 
   }
 
